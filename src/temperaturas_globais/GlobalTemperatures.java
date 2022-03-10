@@ -1,3 +1,5 @@
+package temperaturas_globais;
+
 public class GlobalTemperatures {
     private String[] cities;
     private int[] minTemperatures, maxTemperatures;
