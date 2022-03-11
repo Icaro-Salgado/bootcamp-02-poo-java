@@ -1,5 +1,6 @@
 package corrida_na_selva;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -43,13 +44,19 @@ public class Main {
         }
     }
 
-    private Integer getUserInput() {
+    private Integer getUserMainMenuInput() {
         Integer opcao;
 
         printMenuPrincipal();
         System.out.print("Digite a opção desejada: ");
 
-        opcao = input.nextInt();
+        try {
+            opcao = input.nextInt();
+
+        } catch (InputMismatchException ie) {
+            input.nextLine();
+            return -1;
+        }
 
         return opcao;
     }
@@ -74,11 +81,22 @@ public class Main {
         this.evento.adicionarInscricao(inscricao);
     }
 
-    public void run(){
+    private void getParticipantesNaCategoria() {
+        Integer opcao;
+
+        printMenuSelecionarCategoria();
+        System.out.print("Digite a opção desejada: ");
+
+        opcao = input.nextInt();
+
+        this.evento.listarParticipantesCategoria(this.evento.getCategoriaById(opcao));
+    }
+
+    public void run() {
         Integer userOption;
 
         do {
-            userOption = this.getUserInput();
+            userOption = this.getUserMainMenuInput();
 
             switch (userOption) {
                 case 1:
@@ -88,12 +106,23 @@ public class Main {
                 case 2:
                     this.evento.listarTodasInscrições();
                     break;
-                    
+
+                case 3:
+                    this.getParticipantesNaCategoria();
+                    break;
+
+                case 4:
+                    break;
+
+                case 5:
+                    break;
+
                 default:
                     break;
             }
-        } while(userOption != this.exitOption);
+        } while (userOption != this.exitOption);
     }
+
     public static void main(String[] args) {
         Main app = new Main();
 
