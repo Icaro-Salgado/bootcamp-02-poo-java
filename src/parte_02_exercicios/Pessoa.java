@@ -9,7 +9,7 @@ public class Pessoa {
 
     }
 
-    public Pessoa(String nome, int idade) {
+    public Pessoa(String nome, int idade, String id) {
         this.nome = nome;
         this.idade = idade;
     }
