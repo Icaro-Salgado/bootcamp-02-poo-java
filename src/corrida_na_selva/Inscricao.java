@@ -33,6 +33,6 @@ public class Inscricao {
             "Nome do inscrito: " + this.participante.nome + 
             "\n" +
             "Categoria da inscrição: " + this.categoria.nome + 
-            "\n==================\n");
+            "\n==================");
     }
 }

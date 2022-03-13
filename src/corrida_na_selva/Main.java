@@ -86,7 +86,7 @@ public class Main {
                 " 3 - Mostrar todas inscrições em uma categoria",
                 " 4 - Cancelar uma inscrição",
                 " 5 - Registrar pagamento",
-                " 6 - Sair do programa"
+                " 6 - Sair do programa",
         };
 
         this.printBanner();
@@ -161,10 +161,8 @@ public class Main {
         System.out.print(ANSI_BLUE);
         this.evento.listarParticipantesCategoria(this.evento.getCategoriaById(opcao));
         System.out.println(ANSI_RESET);
-        
-        System.out.print(ANSI_GREEN + "Aperte enter para voltar ao menu principal..." + ANSI_RESET);
-        input.nextLine();
-        input.nextLine();
+
+        waitUserReturn();
     }
 
     private void listarTodosParticipantes() {
@@ -175,6 +173,10 @@ public class Main {
         this.evento.listarTodasInscrições();
         System.out.print(ANSI_RESET);
         
+        waitUserReturn();
+    }
+
+    private void waitUserReturn() {
         System.out.print(ANSI_GREEN + "Aperte enter para voltar ao menu principal..." + ANSI_RESET);
         input.nextLine();
         input.nextLine();
@@ -183,34 +185,40 @@ public class Main {
     private void cancelarInscricao() {
         Integer opcao;
 
+        printBanner();
+        printMenuTitle("Cancelar uma inscrição");
+
+        System.out.print(ANSI_RED);
         System.out.print("Digite o numero da inscricao a ser cancelada: ");
+        System.out.print(ANSI_RESET);
 
         opcao = input.nextInt();
         input.nextLine();
         Inscricao inscricaoParaCancelar = this.evento.getInscricaoPeloNumeroDaInscricao(opcao);
 
         if (inscricaoParaCancelar == null) {
-            System.out.println("Inscrição não encontrada");
+            System.out.println(ANSI_YELLOW + "Inscrição não encontrada" + ANSI_RESET);
+            waitUserReturn();
             return;
         }
 
-        System.out.println(inscricaoParaCancelar);
+        System.out.println(ANSI_BLUE + inscricaoParaCancelar + ANSI_RESET);
         boolean yn = false;
         String confirmacao;
 
         while (!yn) {
-            System.out.print("Deseja mesmo cancelar essa inscrição? [S/n]");
+            System.out.print(ANSI_RED + "Deseja mesmo cancelar essa inscrição? [S/n]" + ANSI_RESET);
             confirmacao = input.nextLine().toLowerCase();
 
             switch (confirmacao) {
                 case "s":
                     yn = true;
                     this.evento.cancelarUmaInscricao(inscricaoParaCancelar);
-                    System.out.println("Inscrição cancelada com sucesso!");
+                    System.out.println(ANSI_GREEN + "Inscrição cancelada com sucesso!" + ANSI_RESET);
                     break;
 
                 case "n":
-                    System.out.println("A inscrição não foi cancelada!");
+                    System.out.println(ANSI_YELLOW + "A inscrição não foi cancelada!" + ANSI_RESET);
                     yn = true;
                     break;
 
@@ -219,6 +227,8 @@ public class Main {
             }
 
         }
+
+        waitUserReturn();
 
     }
 
