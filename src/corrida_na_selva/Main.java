@@ -152,12 +152,19 @@ public class Main {
     private void listarParticipantesNaCategoria() {
         Integer opcao;
 
+        printBanner();
+        printMenuTitle("Listar participantes na categoria");
         printMenuSelecionarCategoria(false);
-        System.out.print("Digite a opção desejada: ");
 
         opcao = input.nextInt();
 
+        System.out.print(ANSI_BLUE);
         this.evento.listarParticipantesCategoria(this.evento.getCategoriaById(opcao));
+        System.out.println(ANSI_RESET);
+        
+        System.out.print(ANSI_GREEN + "Aperte enter para voltar ao menu principal..." + ANSI_RESET);
+        input.nextLine();
+        input.nextLine();
     }
 
     private void listarTodosParticipantes() {
