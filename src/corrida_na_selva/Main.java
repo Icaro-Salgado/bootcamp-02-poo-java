@@ -10,17 +10,28 @@ public class Main {
 
     private Scanner input = new Scanner(System.in);
 
+    // Para utilizar cores no terminal
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
     public Main() {
         this.evento = new Evento();
     }
 
-    public static void clearScreen() {  
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();  
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     private void printBanner() {
-        System.out.println();
+        System.out.println(ANSI_GREEN);
         System.out.println("a88888b.                            oo       dP");
         System.out.println("d8'   `88                                     88");
         System.out.println("88        .d8888b. 88d888b. 88d888b. dP .d888b88 .d8888b.");
@@ -35,67 +46,70 @@ public class Main {
         System.out.println("88'  `88 88'  `88    Y8ooooo. 88ooood8 88 88   d8' 88'  `88");
         System.out.println("88    88 88.  .88          88 88.  ... 88 88 .88'  88.  .88");
         System.out.println("dP    dP `88888P8    `88888P' `88888P' dP 8888P'   `88888P8");
-        System.out.println();
+        System.out.println(ANSI_RESET);
     }
 
     private void printMenuTitle(String title) {
-        // Tamanho do banner, pode ser obtido contando o tamanho da maior linha do banner
+        // Tamanho do banner, pode ser obtido contando o tamanho da maior linha do
+        // banner
         int bannerSize = 59;
-        
+
         // Espaços entre o inicio do titulo || e o texto do titulo
         // a largura do titulo do menu deve ser igual a do banner
         int spacesBetween = Math.floorDiv((bannerSize - title.length() - 4), 2);
-
+        System.out.print(ANSI_BLUE);
         System.out.println("=".repeat(bannerSize));
         System.out.println("||" + " ".repeat(spacesBetween) + title + " ".repeat(spacesBetween) + " ||");
         System.out.println("=".repeat(bannerSize));
+        System.out.println(ANSI_RESET);
+    }
+
+    private void printMenuOpcoes(String[] opcoes, boolean vertical) {
+        System.out.print(ANSI_BLUE);
+        for (String opcao : opcoes) {
+            if (vertical) {
+                System.out.println(opcao);
+            } else {
+                System.out.print(opcao + "\t");
+            }
+        }
+        System.out.println(ANSI_RESET);
+
+        System.out.print(ANSI_RED + "Digite a opção desejada: " + ANSI_RESET);
     }
 
     private void printMenuPrincipal() {
         // A partir daqui o código é unicamente para printar melhor no cli
         String[] opcoes = new String[] {
-                "1 - Adicionar inscrição",
-                "2 - Mostrar todas inscrições",
-                "3 - Mostrar todas inscrições em uma categoria",
-                "4 - Cancelar uma inscrição",
-                "5 - Registrar pagamento",
-                "6 - Sair do programa"
+                " 1 - Adicionar inscrição",
+                " 2 - Mostrar todas inscrições",
+                " 3 - Mostrar todas inscrições em uma categoria",
+                " 4 - Cancelar uma inscrição",
+                " 5 - Registrar pagamento",
+                " 6 - Sair do programa"
         };
-        
+
         this.printBanner();
         this.printMenuTitle("Menu principal");
-        // System.out.println("=".repeat(59));
-        // System.out.println("||" + " ".repeat(20) + "Menu principal" + " ".repeat(20) + " ||");
-        // System.out.println("=".repeat(59));
-        for (String opcao : opcoes) {
-            System.out.println(opcao);
-        }
+
+        printMenuOpcoes(opcoes, true);
+        
     }
 
-    private void printMenuSelecionarCategoria(boolean horizontal) {
+    private void printMenuSelecionarCategoria(boolean vertical) {
         String[] opcoes = new String[] {
-                "1 - Circuito pequeno",
-                "2 - Circuito médio",
-                "3 - Circuito avançado",
+                " 1 - Circuito pequeno",
+                " 2 - Circuito médio",
+                " 3 - Circuito avançado",
         };
 
-        System.out.println("\nSelecione a categoria:");
-        for (String opcao : opcoes) {
-            if (horizontal){ 
-                System.out.print(opcao + "\t");
-            } else {
-                System.out.println(opcao);
-            }
-        }
-
-        System.out.println();
+        printMenuOpcoes(opcoes, vertical);
     }
 
     private Integer getUserMainMenuInput() {
         Integer opcao;
 
         printMenuPrincipal();
-        System.out.print("Digite a opção desejada: ");
 
         try {
             opcao = input.nextInt();
@@ -112,10 +126,11 @@ public class Main {
         this.printBanner();
         this.printMenuTitle("Adicionar participante");
 
-        System.out.print("Digite o nome do participante: ");
+        System.out.print(ANSI_RED + "Digite o nome do participante: " + ANSI_RESET);
         input.nextLine();
         String nomeParticipante = input.nextLine();
 
+        System.out.println(ANSI_RED + "Selecione a categoria do participante: " + ANSI_RESET);
         printMenuSelecionarCategoria(true);
         Integer userInput = input.nextInt();
         Categoria categoria;
@@ -128,6 +143,10 @@ public class Main {
         Inscricao inscricao = new Inscricao(participante, categoria, 0, evento.numeroInscricoes());
 
         this.evento.adicionarInscricao(inscricao);
+
+        System.out.print(ANSI_GREEN + "Participante adicionado com sucesso! Aperte alguma tecla para prosseguir...");
+        input.nextLine();
+        input.nextLine();
     }
 
     private void getParticipantesNaCategoria() {
@@ -159,7 +178,7 @@ public class Main {
         boolean yn = false;
         String confirmacao;
 
-        while(!yn) {
+        while (!yn) {
             System.out.print("Deseja mesmo cancelar essa inscrição? [S/n]");
             confirmacao = input.nextLine().toLowerCase();
 
@@ -169,7 +188,7 @@ public class Main {
                     this.evento.cancelarUmaInscricao(inscricaoParaCancelar);
                     System.out.println("Inscrição cancelada com sucesso!");
                     break;
-                
+
                 case "n":
                     System.out.println("A inscrição não foi cancelada!");
                     yn = true;
@@ -178,7 +197,7 @@ public class Main {
                 default:
                     break;
             }
-        
+
         }
 
     }
