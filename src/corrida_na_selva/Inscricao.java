@@ -27,12 +27,12 @@ public class Inscricao {
         
         
         return (
-            "\n==================\n"+
-            "Inscrição: " + this.numeroDeInscricao + 
+            "==================\n"+
+            "Número da inscrição: " + this.numeroDeInscricao + 
             "\n" +
-            "Participante: " + this.participante.nome + 
+            "Nome do inscrito: " + this.participante.nome + 
             "\n" +
-            "Inscrito na categoria: " + this.categoria.nome + 
+            "Categoria da inscrição: " + this.categoria.nome + 
             "\n==================\n");
     }
 }

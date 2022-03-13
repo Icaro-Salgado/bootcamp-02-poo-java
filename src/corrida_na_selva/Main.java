@@ -144,12 +144,12 @@ public class Main {
 
         this.evento.adicionarInscricao(inscricao);
 
-        System.out.print(ANSI_GREEN + "Participante adicionado com sucesso! Aperte alguma tecla para prosseguir...");
+        System.out.print(ANSI_GREEN + "Participante adicionado com sucesso! Aperte enter para retornar ao menu principal..." + ANSI_RESET);
         input.nextLine();
         input.nextLine();
     }
 
-    private void getParticipantesNaCategoria() {
+    private void listarParticipantesNaCategoria() {
         Integer opcao;
 
         printMenuSelecionarCategoria(false);
@@ -158,6 +158,19 @@ public class Main {
         opcao = input.nextInt();
 
         this.evento.listarParticipantesCategoria(this.evento.getCategoriaById(opcao));
+    }
+
+    private void listarTodosParticipantes() {
+        printBanner();
+        printMenuTitle("Lista de todos os participantes inscritos no evento");
+
+        System.out.print(ANSI_BLUE);
+        this.evento.listarTodasInscrições();
+        System.out.print(ANSI_RESET);
+        
+        System.out.print(ANSI_GREEN + "Aperte enter para voltar ao menu principal..." + ANSI_RESET);
+        input.nextLine();
+        input.nextLine();
     }
 
     private void cancelarInscricao() {
@@ -216,12 +229,12 @@ public class Main {
 
                 case 2:
                     clearScreen();
-                    this.evento.listarTodasInscrições();
+                    this.listarTodosParticipantes();;
                     break;
 
                 case 3:
                     clearScreen();
-                    this.getParticipantesNaCategoria();
+                    this.listarParticipantesNaCategoria();
                     break;
 
                 case 4:

@@ -48,7 +48,6 @@ public class Evento {
     }
 
     public void listarTodasInscrições() {
-        System.out.println("");
         for (Inscricao inscricao : incricoes) {
             System.out.println(inscricao.toString());
         }
