@@ -27,6 +27,7 @@ public class Inscricao {
         
         
         return (
+            "\n==================\n"+
             "Inscrição: " + this.numeroDeInscricao + 
             "\n" +
             "Participante: " + this.participante.nome + 

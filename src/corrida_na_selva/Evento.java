@@ -62,6 +62,16 @@ public class Evento {
         }
     }
 
+    public Inscricao getInscricaoPeloNumeroDaInscricao(Integer numeroDaInscricao) {
+        for (Inscricao inscricao : incricoes) {
+            if (inscricao.numeroDeInscricao.equals(numeroDaInscricao)) {
+                return inscricao;
+            }
+        }
+
+        return null;
+    }
+
     public void cancelarUmaInscricao(Inscricao inscricaoASerCancelada) {
         this.incricoes.remove(inscricaoASerCancelada);
     }

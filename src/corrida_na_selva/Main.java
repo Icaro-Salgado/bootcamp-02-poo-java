@@ -92,6 +92,48 @@ public class Main {
         this.evento.listarParticipantesCategoria(this.evento.getCategoriaById(opcao));
     }
 
+    private void cancelarInscricao() {
+        Integer opcao;
+
+        System.out.print("Digite o numero da inscricao a ser cancelada: ");
+
+        opcao = input.nextInt();
+        input.nextLine();
+        Inscricao inscricaoParaCancelar = this.evento.getInscricaoPeloNumeroDaInscricao(opcao);
+
+        if (inscricaoParaCancelar == null) {
+            System.out.println("Inscrição não encontrada");
+            return;
+        }
+
+        System.out.println(inscricaoParaCancelar);
+        boolean yn = false;
+        String confirmacao;
+
+        while(!yn) {
+            System.out.print("Deseja mesmo cancelar essa inscrição? [S/n]");
+            confirmacao = input.nextLine().toLowerCase();
+
+            switch (confirmacao) {
+                case "s":
+                    yn = true;
+                    this.evento.cancelarUmaInscricao(inscricaoParaCancelar);
+                    System.out.println("Inscrição cancelada com sucesso!");
+                    break;
+                
+                case "n":
+                    System.out.println("A inscrição não foi cancelada!");
+                    yn = true;
+                    break;
+
+                default:
+                    break;
+            }
+        
+        }
+
+    }
+
     public void run() {
         Integer userOption;
 
@@ -112,6 +154,7 @@ public class Main {
                     break;
 
                 case 4:
+                    this.cancelarInscricao();
                     break;
 
                 case 5:
