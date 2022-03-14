@@ -75,6 +75,14 @@ public class Evento {
         this.incricoes.remove(inscricaoASerCancelada);
     }
 
+    public void realizarPagamento(Inscricao inscricaoPagante, int valor) {
+        for (Inscricao inscricao : incricoes) {
+            if (inscricao.numeroDeInscricao.equals(inscricaoPagante.numeroDeInscricao)) {
+                inscricao.pagarInscricao(valor);
+            }
+        }
+    }
+
     public Integer numeroInscricoes() {
         try {
             return incricoes.size();

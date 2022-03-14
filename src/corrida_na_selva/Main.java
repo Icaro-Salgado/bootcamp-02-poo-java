@@ -93,7 +93,7 @@ public class Main {
         this.printMenuTitle("Menu principal");
 
         printMenuOpcoes(opcoes, true);
-        
+
     }
 
     private void printMenuSelecionarCategoria(boolean vertical) {
@@ -144,7 +144,8 @@ public class Main {
 
         this.evento.adicionarInscricao(inscricao);
 
-        System.out.print(ANSI_GREEN + "Participante adicionado com sucesso! Aperte enter para retornar ao menu principal..." + ANSI_RESET);
+        System.out.print(ANSI_GREEN
+                + "Participante adicionado com sucesso! Aperte enter para retornar ao menu principal..." + ANSI_RESET);
         input.nextLine();
         input.nextLine();
     }
@@ -172,7 +173,7 @@ public class Main {
         System.out.print(ANSI_BLUE);
         this.evento.listarTodasInscrições();
         System.out.print(ANSI_RESET);
-        
+
         waitUserReturn();
     }
 
@@ -232,6 +233,35 @@ public class Main {
 
     }
 
+    private void realizarPagamento() {
+        Integer opcao;
+
+        printBanner();
+        printMenuTitle("Realizar um pagamento");
+
+        System.out.print(ANSI_RED);
+        System.out.print("Digite o numero da inscricao que o pagamento será registrado: ");
+        System.out.print(ANSI_RESET);
+
+        opcao = input.nextInt();
+        input.nextLine();
+        Inscricao inscricaoPagamento = this.evento.getInscricaoPeloNumeroDaInscricao(opcao);
+
+        if (inscricaoPagamento == null) {
+            System.out.println(ANSI_YELLOW + "Inscrição não encontrada" + ANSI_RESET);
+            waitUserReturn();
+            return;
+        }
+
+        System.out.println(ANSI_BLUE + inscricaoPagamento + ANSI_RESET);
+        System.out.print("Digite o valor do pagamento: ");
+        int valorPagamento = input.nextInt();
+
+        this.evento.realizarPagamento(inscricaoPagamento, valorPagamento);
+        System.out.println(ANSI_GREEN + "Pagamento realizado com sucesso" + ANSI_RESET);
+        waitUserReturn();
+    }
+
     public void run() {
         Integer userOption;
 
@@ -246,7 +276,8 @@ public class Main {
 
                 case 2:
                     clearScreen();
-                    this.listarTodosParticipantes();;
+                    this.listarTodosParticipantes();
+                    ;
                     break;
 
                 case 3:
@@ -260,6 +291,7 @@ public class Main {
                     break;
 
                 case 5:
+                    realizarPagamento();
                     break;
 
                 default:
