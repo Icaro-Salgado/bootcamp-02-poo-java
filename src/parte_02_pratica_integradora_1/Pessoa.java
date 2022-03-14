@@ -1,4 +1,4 @@
-package parte_02_exercicios;
+package parte_02_pratica_integradora_1;
 
 public class Pessoa {
     private String nome, id;

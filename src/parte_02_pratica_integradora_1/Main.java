@@ -1,9 +1,9 @@
-package parte_02_exercicios;
+package parte_02_pratica_integradora_1;
 
 public class Main {
 
     public static void main(String[] args) {
-        Pessoa zeNinguem = new Pessoa();
+        // Pessoa zeNinguem = new Pessoa();
         // Pessoa cidadoIncompleto = new Pessoa("Alguma combinação de letras", 101); // Isso vai quebrar
         Pessoa novaGeracao = new Pessoa("Enzo", "2021", 18, 80.5f, 1.91f);
 
