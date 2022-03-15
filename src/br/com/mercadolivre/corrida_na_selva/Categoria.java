@@ -1,4 +1,4 @@
-package corrida_na_selva;
+package br.com.mercadolivre.corrida_na_selva;
 
 public class Categoria {
     public String nome, descricao;

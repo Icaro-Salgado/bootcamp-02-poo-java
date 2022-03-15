@@ -1,4 +1,4 @@
-package temperaturas_globais;
+package br.com.mercadolivre.temperaturas_globais;
 
 public class GlobalTemperatures {
     private String[] cities;
