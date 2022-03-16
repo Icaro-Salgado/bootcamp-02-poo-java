@@ -1,7 +1,11 @@
 package br.com.mercadolivre.parte_03.projeto_integrador_01.exercicio_01.transacoes;
 
-public interface Transacao {
-    void transacaoOk();
+public abstract class Transacao {
+    static void transacaoOk(String msg){
+        System.out.println(msg);
+    };
 
-    void transacaoNaoOk();
+    static void transacaoNaoOk(String msg){
+        System.out.println(msg);
+    };
 }
