@@ -23,7 +23,7 @@ public class Application {
         Cachorro cachorro = new Cachorro();
         Gato gato = new Gato();
 
-        System.out.println("Implementação direta");
+        System.out.println("=== Implementação direta ===");
         vaca.emitirSom();
         vaca.comerPasto();
         System.out.println();
@@ -36,7 +36,7 @@ public class Application {
         gato.comerCarne();
         System.out.println();
 
-        System.out.println("Implementação do comerAnimal");
+        System.out.println("=== Implementação do comerAnimal ===");
         comerAnimal(vaca);
         comerAnimal(cachorro);
         comerAnimal(gato);
